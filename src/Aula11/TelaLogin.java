@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Aula11;
 
 import Controllers.UsuarioController;
 import Tools.Conexao;
+import modelos.usuario;
 import tools.CaixaDeDialogo;
 
 
@@ -16,7 +13,8 @@ public class TelaLogin extends javax.swing.JFrame {
     public TelaLogin() {
         initComponents();
     }
-
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,7 +90,7 @@ public class TelaLogin extends javax.swing.JFrame {
         String User = txtUser.getText();
         String Pass = pswSenha.getText();
 
-        boolean existe = controller.login(user, pass);
+        boolean existe = controller.login(User, Pass);
         
         if(existe){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário validado!");

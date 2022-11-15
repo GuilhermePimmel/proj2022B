@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controllers;
 
 import Tools.Conexao;
@@ -21,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import modelos.usuario;
 //import model.Usuario;
 
 /**
@@ -29,40 +26,65 @@ import javax.swing.table.TableColumn;
  */
 public class UsuarioController {
     
-    //Usuario objUsuario;
-    //JTable jtbUsuarios = null;
-    
-    //public UsuarioDAO(Usuario objUsuario, JTable jtbUsuarios) {
-    //    this.objUsuario = objUsuario;
-    //    this.jtbUsuarios = jtbUsuarios;
-    //}
-    
     public boolean login(String user, String pass)
     {
         try {
             Conexao.abreConexao();
+            ResultSet rs = null;
             PreparedStatement stmt;
-            ResultSet rs;
 
             String wSql = "";
-            wSql = " SELECT id ";
+            wSql = " SELECT nome ";
             wSql += " FROM usuarios ";
-            wSql += " WHERE user = (?)";
-            wSql += " AND pass = (?)";
-            stmt = Conexao.con.prepareStatement(wSql);
-            stmt.setString(1, user);
-            stmt.setString(2, pass);
+            wSql += " WHERE login = ? ";
+            wSql += " AND senha = md5(?) ";
 
-            rs = stmt.executeQuery();
-            
-            return rs.next();
+            try{
+                System.out.println("Vai Executar Conexão em buscar Usuario");
+                stmt = Conexao.con.prepareStatement(wSql);
+                stmt.setString(1, user);
+                stmt.setString(2, pass);
 
-            catch (SQLException ex )
+                rs = stmt.executeQuery();
+                
+                return rs.next();
+                
+            }catch (SQLException ex )
             {
-                System.out.println("ERRO de SQL: " + ex.getMessage());
+                System.out.println("ERRO de SQL: " + ex.getMessage().toString());
                 return false;
             }
 
+        } catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage().toString());
+            return false;
+        }
 		
+    }
+    
+    public boolean incluir(usuario objUsuario){
+        
+        try {
+            Conexao.abreConexao();
+            PreparedStatement stmt = null;
+
+            stmt = Conexao.con.prepareStatement("INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES(?,?,?,?)");
+            stmt.setString(1, objUsuario.getNome());
+            stmt.setString(2, objUsuario.getUsuario());            
+            stmt.setString(3, objUsuario.getSenha());
+            stmt.setString(4, objUsuario.getTelefone());
+
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            Conexao.closeConnection(Conexao.con);
+        }
+        
     }
 }
