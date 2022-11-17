@@ -38,16 +38,7 @@ public class UsuarioController {
             wSql += " FROM usuarios ";
             wSql += " WHERE login = ? ";
             wSql += " AND senha = md5(?) ";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('PEDRO','PEDRINHO','111','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('LUCAS','LUQUINHA','222','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('JUCA','JUQUINHA','333','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('FELIPE','FELIPINHO','444','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('ALAN','ALANZINHO','555','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('CAIO','CAINHO','666','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('TIAGO','TIAGUINHO','777','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('RUAN','RUANZINHO','888','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('MATEUS','MATEUZINHO','999','(51) 999')";
-            wSql += " INSERT INTO usuarios (nome, usuario, senha, telefone) VALUES('JOAO','JOAOZINHO','000','(51) 999')";
+
             try{
                 System.out.println("Vai Executar Conexão em buscar Usuario");
                 stmt = Conexao.con.prepareStatement(wSql);

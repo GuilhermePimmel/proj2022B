@@ -1,4 +1,5 @@
 
+
 package Aula11;
 
 import Controllers.UsuarioController;
@@ -94,6 +95,10 @@ public class TelaLogin extends javax.swing.JFrame {
         
         if(existe){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário validado!");
+            TelaMenu telas = new TelaMenu();
+            telas.setVisible(true);
+            dispose();
+            
         }else{
             CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário inexistente!");
         }
